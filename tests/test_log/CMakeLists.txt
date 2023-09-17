@@ -1,7 +1,10 @@
 INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR})
-
-ADD_EXECUTABLE(tlog  TestLog.cc)
 SET(EXECUTABLE_OUTPUT_PATH  ${PROJECT_SOURCE_DIR}/bin/tests)
 
+ADD_EXECUTABLE(tlog  TestLog.cc)
 TARGET_LINK_LIBRARIES(tlog ananas_util)
-ADD_DEPENDENCIES(tlog ananas_util)
+
+ADD_EXECUTABLE(tlog1  TestLog1.cc)
+TARGET_LINK_LIBRARIES(tlog1 ananas_util)
+
+# ADD_DEPENDENCIES(tlog ananas_util)
