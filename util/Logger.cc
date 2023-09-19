@@ -33,7 +33,7 @@ enum LogColor {
 static const size_t kDefaultLogSize = 32 * 1024 * 1024;
 
 static const size_t kPrefixLevelLen = 6;
-static const size_t kPrefixTimeLen = 27;
+static const size_t kPrefixTimeLen = 28;
 
 static bool MakeDir(const char* dir) {
     if (mkdir(dir, 0755) != 0) {
@@ -148,8 +148,8 @@ void Logger::Flush(enum LogLevel level) {
     } else {
         auto msec = now.MicroSeconds() % 1000000;
         if (msec != lastLogMSecond_) {
-            snprintf(tmpBuffer_ + 20, 7, "%06d", static_cast<int>(msec));
-            tmpBuffer_[26] = ']';
+            snprintf(tmpBuffer_ + 21, 7, "%06d", static_cast<int>(msec));
+            tmpBuffer_[27] = ']';
             lastLogMSecond_ = msec;
         }
     }

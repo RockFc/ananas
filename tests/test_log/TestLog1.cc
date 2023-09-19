@@ -5,6 +5,8 @@
 #include "util/ThreadPool.h"
 #include "util/Logger.h"
 #include "util/TimeUtil.h"
+#include <sys/syscall.h>
+#include <unistd.h>
 
 
 int main(int ac, char* av[]) {
@@ -13,7 +15,10 @@ int main(int ac, char* av[]) {
     // auto log = ananas::LogManager::Instance().CreateLog(logDEBUG, logConsole);
     // auto log = ananas::LogManager::Instance().CreateLog(logINFO, logConsole);
     auto log = ananas::LogManager::Instance().CreateLog(logALL, logConsole);
-
+    std::cout << "getpid()" << getpid() << std::endl;
+    std::cout << "this_thread::get_id=" << std::this_thread::get_id() << std::endl;
+    //syscall(SYS_gettid);
+    std::cout << "syscall(SYS_gettid)=" << syscall(SYS_gettid) << std::endl;
 
 
     DBG(log) << "Hello ananas, I am debug log!!!";
