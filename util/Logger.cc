@@ -97,25 +97,23 @@ bool Logger::_CheckChangeFile() {
 }
 
 const std::string& Logger::_MakeFileName() {
-    // char name[32];
-    // Time now;
-    // size_t len = now.FormatTime(name);
-    // name[len] = '\0';
+    char name[32];
+    Time now;
+    size_t len = now.FormatTime(name);
+    name[len] = '\0';
 
-    // std::ostringstream pid;
-    // pid << "@" << ::getpid() << "-";
-
-    // seq_ ++;
-    // fileName_  = directory_ + "/" + name + pid.str() + std::to_string(seq_) + ".log";
-
-    // return fileName_;
-
-    auto now = std::chrono::system_clock::now();
-    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+    auto n = std::chrono::system_clock::now();
+    std::time_t now_c = std::chrono::system_clock::to_time_t(n);
     char buffer[80];
     std::strftime(buffer, sizeof(buffer), "%Y-%m-%d", std::localtime(&now_c));
-    std::string name = std::string(buffer);
-    fileName_ = directory_ + "/" + name + "_" + std::to_string(::getpid()) + "_" + std::to_string(++seq_) + ".log";
+    std::string time_str = std::string(buffer);
+
+    std::ostringstream pid;
+    pid << "_" << ::getpid() << "_";
+
+    seq_ ++;
+    fileName_  = directory_ + "/" + time_str + pid.str() + std::to_string(seq_) + ".log";
+
     return fileName_;
 }
 
